@@ -4,7 +4,7 @@ description: 'st environment that **faster** and **more lightweight**. For examp
 techs: ['js', 'ts', 'ts']
 ---
 
-## **🧩** "testEnvironment"
+## Test Environment
 
 This option allows you to specify the test environment that will be used for testing. By default, Jest uses **_jsdom_**, which simulates a browser-like environment. However, for React Native projects, you may want to use **_node_** instead, which is **faster** and **more lightweight**. For example:
 
@@ -14,7 +14,7 @@ This option allows you to specify the test environment that will be used for tes
 
 This way, **Jest** will run your tests in a **Node.js** environment, which is more suitable for testing React Native components. You can also create your own custom test environment.
 
-### **🧩** "testMatch"
+### TestMatch
 
 The **_“testMatch”_** option is used to specify **which files should be considered** as **test files by Jest**. It is an array of glob patterns that match the file paths of your test files. For example, if you have a folder called **“tests”** in your project root, and you want to run all the files inside it that end with **“.test.js”** or **“.spec.js”**, you can use this option:
 
@@ -35,7 +35,7 @@ You can also have **multiple patterns in the array**, and Jest will run any file
 
 This will run all the files in the “tests” folder or its subfolders that end with **“.test.js”** or **“.spec.js”**.
 
-### **🧩** "coverageThreshold"
+### Coverage Threshold
 
 The _“coverageThreshold”_ option is used to specify the **minimum percentage of code coverage** that your **tests must achieve**. Code coverage is a measure of how much of your code is executed by your tests. It can be calculated for different aspects of your code, such as **statements**, **branches**, **functions**, and **lines**.
 
