@@ -1,0 +1,155 @@
+---
+title: 'react-native-begin
+description: 'st environment that ng. B uses **_jsdom_**, which simulates a browser-like environment. However, for React Native projects, you may want to use **_node_** instead, which is **faster** and **more lightweight**. For example:r'
+techs: ['js', 'ts', 'ts']
+---
+
+## **🧩** "testEnvironment"
+
+This option allows you to specify the test environment that will be used for testing. By default, Jest uses **_jsdom_**, which simulates a browser-like environment. However, for React Native projects, you may want to use **_node_** instead, which is **faster** and **more lightweight**. For example:
+
+```json
+    "testEnvironment": "node"
+```
+
+This way, **Jest** will run your tests in a **Node.js** environment, which is more suitable for testing React Native components. You can also create your own custom test environment.
+
+### **🧩** "testMatch"
+
+The **_“testMatch”_** option is used to specify **which files should be considered** as **test files by Jest**. It is an array of glob patterns that match the file paths of your test files. For example, if you have a folder called **“tests”** in your project root, and you want to run all the files inside it that end with **“.test.js”** or **“.spec.js”**, you can use this option:
+
+```json
+    "testMatch": [
+        "<rootDir>/__tests__/*.js",
+        "<rootDir>/src/**/*.(test|spec).js"
+    ]
+```
+
+The `<rootDir>` is a special token that Jest replaces with the path to the project root. The `**` means any subdirectories, and the `*` means any file name. The (test|spec) means either **“test”** or **“spec”**, and the .js means the file extension. You can use other glob patterns to match different file names or extensions, such as .jsx, .ts, or .tsx.
+
+You can also have **multiple patterns in the array**, and Jest will run any file that matches at least one of them. For example, if you have some test files in a folder called **“tests”** and some other test files in your **“src”** folder, you can use this option:
+
+```json
+    "testMatch": ["<rootDir>/tests/**/*.(test|spec).js"]
+```
+
+This will run all the files in the “tests” folder or its subfolders that end with **“.test.js”** or **“.spec.js”**.
+
+### **🧩** "coverageThreshold"
+
+The _“coverageThreshold”_ option is used to specify the **minimum percentage of code coverage** that your **tests must achieve**. Code coverage is a measure of how much of your code is executed by your tests. It can be calculated for different aspects of your code, such as **statements**, **branches**, **functions**, and **lines**.
+
+The **“coverageThreshold”** option is an object that has a **“global”** property and optionally a **“per-file”** property. The “global” property is another object that has four properties: **“statements”, “branches”, “functions”, and “lines”**. Each of these properties is a number between 0 and 100 that represents the percentage of code coverage required for that aspect. For example, if you want to enforce that your tests cover at least **80%** of your statements, **70%** of your branches, **90%** of your functions, and **85%** of your lines, you can use this option:
+
+```json
+    "coverageThreshold": {
+          "global": {
+            "statements": 80,
+            "branches": 70,
+            "functions": 90,
+            "lines": 85
+        }
+    }
+```
+
+The **_“per-file”_** property is an array of objects that have a **_“path”_** property and a **_“threshold”_** property. The **“path”** property is a glob pattern that matches the file paths of your code files. The **“threshold”** property is an object that has the same four properties as the “global” object. This way, **you can specify different coverage thresholds for different files** or **groups of files**. For example, if you want to enforce that your tests cover at least **95%** of your **_components_** and **_hooks_**, and at least **75%** of everything else, you can use this option:
+
+```json
+    "coverageThreshold": {
+          "global": {
+            "statements": 75,
+            "branches": 75,
+            "functions": 75,
+            "lines": 75
+          },
+          "per-file": [
+            {
+              "path": "**/src/components/*.tsx",
+              "threshold": {
+                "statements": 95,
+                "branches": 95,
+                "functions": 95,
+                "lines": 95
+              }
+            },
+            {
+              "path": "**/src/hooks/*.tsx",
+              "threshold": {
+                "statements": 95,
+                "branches": 95,
+                "functions": 95,
+                "lines": 95
+              }
+            }
+        ]
+    }
+```
+
+If you use the **_“coverageThreshold”_** option, **Jest** will fail the test run if the actual code coverage is lower than the specified thresholds. This can help you ensure that your tests are comprehensive and reliable.
+
+> Let’s understand each **Code Coverage** terms **“statements”**, **“branches”**, **“functions”**, **“lines”** with examples below.
+
+**🍭 Statements:** A statement is a single instruction or command in your code, such as a variable declaration, an assignment, a function call, a loop, a conditional, etc. For example, in this code snippet:
+
+```javascript
+let x = 10; // statement 1
+let y = 20; // statement 2
+if (x > y) {
+  // statement 3
+  console.log("x is greater"); // statement 4
+} else {
+  console.log("y is greater"); // statement 5
+}
+```
+
+There are five statements in total. The statement coverage is the percentage of statements that are executed by your tests. For example, if your tests only run the “else” branch of the conditional, then the **statement coverage is 60%** (3 out of 5 statements are executed).
+
+**🍭 Branches:** A branch is a possible path of execution in your code, such as an “if” or “else” block, a “case” or “default” block in a switch statement, a ternary operator, etc. For example, in this code snippet:
+
+```javascript
+let x = 10;
+let y = 20;
+if (x > y) {
+  // branch 1
+  console.log("x is greater");
+} else {
+  // branch 2
+  console.log("y is greater");
+}
+```
+
+There are **two branches** in total. The branch coverage is the percentage of branches that are executed by your tests. For example, if your tests only run the “else” branch of the conditional, then the branch coverage is 50% (1 out of 2 branches are executed).
+
+**🍭 Functions:** A function is a block of code that performs a specific task and can be invoked by other parts of your code. For example, in this code snippet:
+
+```javascript
+function add(a, b) {
+  // function 1
+  return a + b;
+}
+
+function subtract(a, b) {
+  // function 2
+  return a - b;
+}
+
+let x = add(10, 20); // statement 3
+let y = subtract(30, 15);
+```
+
+There are two functions in total. The function coverage is the percentage of functions that are invoked by your tests. For example, if your tests only call the “add” function, then the **function coverage is 50%** (1 out of 2 functions are invoked).
+
+**🍭 Lines:** A line is a single line of code in your source file. For example, in this code snippet:
+
+```javascript
+let x = 10; // line 1
+let y = 20; // line 2
+if (x > y) {
+  // line 3
+  console.log("x is greater"); // line 4
+} else {
+  console.log("y is greater"); // line 5
+}
+```
+
+There are five lines in total. The line coverage is the percentage of lines that are executed by your tests. For example, if your tests only run the “else” branch of the conditional, then the line **coverage is 80%** (4 out of 5 lines are executed).
